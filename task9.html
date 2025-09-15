@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Аватар GitHub</title>
+</head>
+<body>
+    <h1>Загрузка аватара...</h1>
+
+    <script>
+        async function f() {
+            try {
+                let githubResponse = await fetch(`https://api.github.com/users/GLEBUSIO`);
+                let githubUser = await githubResponse.json();
+
+                let img = document.createElement('img');
+                img.src = githubUser.avatar_url;
+                img.className = "promise-avatar-example";
+                document.body.append(img);
+
+                await new Promise(resolve => setTimeout(resolve, 5000));
+
+                img.remove();
+
+                return githubUser;
+            } catch (error) {
+                console.error("Произошла ошибка:", error);
+            }
+        }
+
+        f();
+    </script>
+</body>
+</html>
