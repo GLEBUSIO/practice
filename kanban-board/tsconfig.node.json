@@ -1,4 +1,4 @@
-// d:/practice/kanban-board/tsconfig.node.json
+
 {
   "compilerOptions": {
     "composite": true, 
@@ -8,14 +8,14 @@
     "module": "ESNext",
     "skipLibCheck": true,
     
-    /* Bundler mode */
+    
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
     "emitDeclarationOnly": true, 
     
-    /* Linting */
+   
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
