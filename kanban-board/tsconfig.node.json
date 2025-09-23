@@ -1,7 +1,7 @@
 // d:/practice/kanban-board/tsconfig.node.json
 {
   "compilerOptions": {
-    "composite": true, // Добавьте эту строку
+    "composite": true, 
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
     "target": "ES2023",
     "lib": ["ES2023"],
@@ -13,7 +13,7 @@
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
-    "emitDeclarationOnly": true, // Замените "noEmit": true на эту строку
+    "emitDeclarationOnly": true, 
     
     /* Linting */
     "strict": true,
