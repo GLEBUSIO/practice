@@ -1,5 +1,7 @@
+// d:/practice/kanban-board/tsconfig.node.json
 {
   "compilerOptions": {
+    "composite": true, // Добавьте эту строку
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
     "target": "ES2023",
     "lib": ["ES2023"],
@@ -11,7 +13,7 @@
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
-    "noEmit": false, // Измените эту строку
+    "emitDeclarationOnly": true, // Замените "noEmit": true на эту строку
     
     /* Linting */
     "strict": true,
@@ -20,8 +22,7 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
-    "types": ["node"],
-    "composite": true // Добавьте эту строку
+    "types": ["node"]
   },
   "include": ["vite.config.ts"]
 }
