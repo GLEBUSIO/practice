@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "prepare": "husky install"
+    "prepare": "if test \"$VERCEL_ENV\" != \"production\"; then husky install; fi"
   },
   "dependencies": {
     "@hello-pangea/dnd": "^18.0.1",
