@@ -78,7 +78,7 @@ const Column: React.FC<ColumnProps> = ({ title, color, cards, id, onRemove }) =>
         <NewCardForm columnId={id} onAddCard={() => setIsAddingCard(false)} />
       ) : (
         <AddCardButton onClick={() => setIsAddingCard(true)}>
-          + Добавить задачу
+        Add task...
         </AddCardButton>
       )}
     </ColumnContainer>
