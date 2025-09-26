@@ -5,7 +5,7 @@ export const FormContainer = styled.form`
   flex-direction: column;
   padding: 10px;
   background-color: #ffffff;
-  border-radius: 8px;
+  border-radius: 24px;
   margin-top: 10px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 `;

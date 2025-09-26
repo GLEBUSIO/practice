@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import { DragDropContext, Droppable, DropResult } from '@hello-pangea/dnd';
-import { RootState } from './store/store';
-import { reorderCards, moveCard } from './store/board/boardSlice';
+import { DragDropContext, Droppable, type DropResult } from '@hello-pangea/dnd';
+import { type RootState } from './store/store';
+import { reorderCards, moveCard, addColumn, removeColumn } from './store/board/boardSlice';
 import Column from '@components/Column/Column';
 import Card from '@components/Card/Card';
 import { theme } from './styles/theme';
+import { v4 as uuidv4 } from 'uuid';
 
 const AppContainer = styled.div`
   display: flex;
@@ -16,10 +17,45 @@ const AppContainer = styled.div`
   padding: 20px;
   background-color: ${theme.colors.background};
   
-  // Медиа-запрос для мобильных устройств
   @media (max-width: ${theme.breakpoints.tablet}) {
     flex-direction: column;
     align-items: center;
+  }
+`;
+
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 100px;
+
+  @media (max-width: ${theme.breakpoints.tablet}) {
+    flex-direction: column;
+    gap: 10px;
+  }
+`;
+
+const AddColumnButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  & svg {
+    width: 48px;
+    height: 48px;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  &:hover svg {
+    transform: scale(1.1);
   }
 `;
 
@@ -39,11 +75,39 @@ const App: React.FC = () => {
     }
   };
 
+  const handleAddColumn = () => {
+    const newColumnTitle = prompt('Введите название для новой колонки:');
+    if (newColumnTitle) {
+      const newColumnId = uuidv4();
+      dispatch(addColumn({ columnId: newColumnId, title: newColumnTitle }));
+    }
+  };
+
+  const handleRemoveColumn = (columnId: string) => {
+    if (window.confirm('Вы уверены, что хотите удалить эту колонку и все её карточки?')) {
+      dispatch(removeColumn(columnId));
+    }
+  };
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
+      <Header>
+        <h1>Kanban Dashboard</h1>
+        <AddColumnButton onClick={handleAddColumn}>
+          <svg width="100%" height="100%" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="25" cy="25" r="24.5" stroke="#D1D9E6" fill="white"/>
+            <path d="M25 18V32M18 25H32" stroke="#4B566B" strokeWidth="2.5" strokeLinecap="round"/>
+          </svg>
+        </AddColumnButton>
+      </Header>
       <AppContainer>
         {columnOrder.map((columnId) => {
           const column = columns[columnId];
+          
+          if (!column) {
+            return null;
+          }
+
           const columnCards = column.cardIds.map((cardId) => cards[cardId]);
 
           return (
@@ -59,8 +123,13 @@ const App: React.FC = () => {
                     id={column.id}
                     title={column.title}
                     color={column.color}
-                    cards={columnCards.map((card, index) => (
-                      <Card
+                    onRemove={() => handleRemoveColumn(column.id)}
+                    cards={columnCards.map((card, index) => {
+                      if (!card) {
+                        return null;
+                      }
+                      
+                      return <Card
                         key={card.id}
                         title={card.title}
                         description={card.description}
@@ -68,7 +137,7 @@ const App: React.FC = () => {
                         index={index}
                         priority={card.priority}
                       />
-                    ))}
+                    })}
                   />
                   {provided.placeholder}
                 </div>

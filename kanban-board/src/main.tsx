@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App.tsx';
 import { ThemeProvider } from 'styled-components';
-import { store } from './store/store.ts';
 import { Provider } from 'react-redux'; 
-import { GlobalStyle } from './styles/GlobalStyle.ts';
 import { theme } from './styles/theme';
+import { GlobalStyle } from './styles/GlobalStyle.js';
+import { store } from '@store/store.js';
+import App from './App';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

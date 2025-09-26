@@ -14,4 +14,7 @@ export default defineConfig({
       '@assets': path.resolve(__dirname, 'src/assets'),
     },
   },
+  optimizeDeps: {
+    include: ['@reduxjs/toolkit', 'react-redux', '@hello-pangea/dnd'],
+  },
 });

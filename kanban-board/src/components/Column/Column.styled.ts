@@ -1,9 +1,9 @@
-// src/components/Column/Column.styled.ts
+
 import styled from 'styled-components';
 
 export const ColumnContainer = styled.div`
   background-color: #f1f2f6;
-  border-radius: 12px;
+  border-radius: 24px;
   padding: 16px;
   width: 320px;
   min-height: 400px;
@@ -19,7 +19,7 @@ export const ColumnContainer = styled.div`
 
 export const ColumnHeader = styled.div<{ color: string }>`
   background-color: ${({ color }) => color};
-  border-radius: 8px;
+  border-radius: 24px;
   padding: 12px;
   margin-bottom: 16px;
   display: flex;

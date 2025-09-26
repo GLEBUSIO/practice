@@ -1,14 +1,22 @@
 {
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    },
+    {
+      "path": "./tsconfig.app.json"
+    }
+  ],
   "compilerOptions": {
-    "target": "ES2022",
-    "useDefineForClassFields": true,
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "composite": true,
+    "verbatimModuleSyntax": true,
+    "target": "ESNext",
     "jsx": "react-jsx",
     "strict": true,
-    "paths": {
-      "@components/*": ["./src/components/*"]
-    }
-  },
-  "include": ["src"],
-  "exclude": ["node_modules"]
+    "noEmit": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": false,
+    "isolatedModules": true
+  }
 }

@@ -1,4 +1,3 @@
-// src/components/Column/Column.tsx
 import React, { useState } from 'react';
 import NewCardForm from './NewCardForm';
 import { ColumnContainer, ColumnHeader, ColumnTitle, CardCount } from './Column.styled';
@@ -8,7 +7,8 @@ interface ColumnProps {
   title: string;
   color: string;
   cards: React.ReactNode[];
-  id: string; 
+  id: string;
+  onRemove: () => void; 
 }
 
 const AddCardButton = styled.button`
@@ -24,21 +24,61 @@ const AddCardButton = styled.button`
   }
 `;
 
-const Column: React.FC<ColumnProps> = ({ title, color, cards, id }) => {
+const RemoveButton = styled.button`
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  
+  &:hover {
+    color: #f8d7da;
+  }
+`;
+
+const ColumnHeaderContent = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-grow: 1;
+`;
+
+const StyledColumnTitle = styled(ColumnTitle)`
+  color: #fff;
+  margin: 0;
+  padding: 0;
+`;
+
+const StyledCardCount = styled(CardCount)`
+  background-color: #fff;
+  color: ${({ color }) => color};
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+`;
+
+const Column: React.FC<ColumnProps> = ({ title, color, cards, id, onRemove }) => {
   const [isAddingCard, setIsAddingCard] = useState(false);
 
   return (
     <ColumnContainer>
       <ColumnHeader color={color}>
-        <ColumnTitle>{title}</ColumnTitle>
-        <CardCount>{cards.length}</CardCount>
+        <ColumnHeaderContent>
+          <StyledCardCount color={color}>{cards.length}</StyledCardCount>
+          <StyledColumnTitle>{title}</StyledColumnTitle>
+        </ColumnHeaderContent>
+        <RemoveButton onClick={onRemove}>&times;</RemoveButton>
       </ColumnHeader>
       {cards}
       {isAddingCard ? (
         <NewCardForm columnId={id} onAddCard={() => setIsAddingCard(false)} />
       ) : (
         <AddCardButton onClick={() => setIsAddingCard(true)}>
-          + Добавить карточку
+          + Добавить задачу
         </AddCardButton>
       )}
     </ColumnContainer>

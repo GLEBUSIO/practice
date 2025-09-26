@@ -1,4 +1,3 @@
-// src/components/Card/Card.tsx
 import React from 'react';
 import { Draggable } from '@hello-pangea/dnd';
 import { CardContainer, CardHeader, CardTitle, CardDescription } from './Card.styled';
@@ -9,15 +8,15 @@ interface CardProps {
   index: number;
   title: string;
   description: string;
-  priority: 'High' | 'Medium' | 'Low'; // Добавляем приоритет
+  priority: 'High' | 'Medium' | 'Low'; 
 }
 
-// Новый компонент для отображения приоритета
+
 const PriorityTag = styled.span<{ priority: 'High' | 'Medium' | 'Low' }>`
   font-size: 12px;
   font-weight: 600;
   padding: 4px 8px;
-  border-radius: 4px;
+  border-radius: 24px;
   text-transform: uppercase;
   color: #fff;
   background-color: ${({ priority, theme }) => {
